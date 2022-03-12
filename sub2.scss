@@ -1,0 +1,28 @@
+body {
+    background-color: aquamarine;
+}
+
+$number: 1; // .5, 100px, 1em
+$string: bold; // relative, "../images/a.png"
+$color: red; // blue, #FFFF00,
+$boolean: true; // false, true
+$null: null; // 출력X
+$list: orange, royalblue, yellow;
+$map: (
+    o:orange,
+    r: royalblue,
+    y: yellow
+);
+
+@each $c in $list {
+    .list {
+        color: $c;
+    }
+}
+
+
+@each $key, $value in $map {
+    .list-#{$key} {
+        color: $value;
+    }
+}

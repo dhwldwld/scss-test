@@ -1,0 +1,122 @@
+// @import url("./sub.scss");
+// @import "./sub.scss";
+// @import "./sub";
+@import "./sub", "./sub2";
+
+$color: royalblue;
+$size: 100px;
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin box($size: 80px) {
+    width: $size;
+    height: $size;
+    background-color: tomato;
+}
+
+@function ratio($size, $ratio) {
+    @return $size * $ratio
+}
+
+@for $i from 1 through 10 {
+    .box:nth-child(#{$i}) {
+        width: 100px * $i;
+    }
+}
+
+.box2 {
+    $width: 100px;
+    width: $width;
+    height: ratio($width, 1/2);
+    @include center;
+}
+
+div {
+    width: 20px + 20px;
+    /* 100% - 100px => calc(100% - 100px) */
+    height: 40px - 10px;
+    font-size: 10px * 2;
+    /* margin: 30px / 2; // 결과 => margin: 30px/2;  */
+    /* 해결 => (30px / 2) or $size: 30px; margin : $size / 2; */
+    /* margin: 10px + 12px / 2; */
+    padding: 20px % 7;
+}
+
+.span {
+    font-size: 10px;
+    line-height: 10px;
+    font-family: serif;
+    font: 10px / 10px serif; //  '/' 단축속성
+}
+
+.conatiner {
+    position: fixed;
+    top: $size;
+    @include center;
+    .item_2 {
+        @include box(200px);
+    }
+    .item {
+        width: $size;
+        height: $size;
+        transform: translateX($size);
+    }
+    h1 {
+        color: $color;
+        /* background-color: orange; */
+        // font-size: 60px;
+    }
+    ul {
+        li {
+            font-size: 40px;
+            .name {
+                color: royalblue;
+            }
+            .age {
+                color: orange;
+            }
+        }
+    }
+}
+
+.fs {
+    &-small {font-size:  12px;}
+    &-medium {font-size:  14px;}
+    &-large {font-size:  16px;}
+}
+
+.box {
+    $color: royalblue;
+    @include box($size: 200px);
+    font: {
+        weight: bold;
+        size: 10px;
+        family: sans-serif;
+    };
+    margin: {
+        top: 10px;
+        bottom: 20px;
+    };
+    padding: {
+        top: 10px;
+        bottom: 40px;
+        left: 20px;
+        right: 30px;
+    };
+    &:hover {
+        background-color: lighten($color, 10%);
+    }
+    &.built-in {
+        /* background-color: mix($color, red); */
+        /* background-color: lighten($color, 10%); */
+        /* background-color: darken($color, 10%); */
+        /* background-color: saturate($color, 40%); */
+        /* background-color: desaturate($color, 40%); */
+        /* background-color: grayscale($color); */
+        background-color: rgba($color, .5);
+    }
+}
